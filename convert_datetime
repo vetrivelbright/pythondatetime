@@ -1,0 +1,39 @@
+from datetime import datetime
+from dateutil import tz
+from time import strftime
+
+ 
+
+# METHOD 1: Hardcode zones:
+from_zone = tz.gettz('UTC')
+to_zone = tz.gettz('America/Los_Angeles')
+
+ 
+
+# METHOD 2: Auto-detect zones:
+#from_zone = tz.tzutc()
+#to_zone = tz.tzlocal()
+
+ 
+
+#utc = datetime.utcnow()
+utc = datetime.strptime('2023-01-03 10:29:21', '%Y-%m-%d %H:%M:%S')
+
+ 
+
+# Tell the datetime object that it's in UTC time zone since 
+# datetime objects are 'naive' by default
+utc = utc.replace(tzinfo=from_zone)
+print(utc)
+
+ 
+
+# Convert time zone
+central = utc.astimezone(to_zone)
+print(central)
+
+ 
+
+aaa = central.strftime('%Y-%m-%d %H:%M:%S')
+#xxx = datetime.strptime(str(central), '%Y-%m-%d %H:%M:%S')
+print(aaa)
